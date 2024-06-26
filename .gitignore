@@ -1,0 +1,20 @@
+node_modules
+
+.env
+
+
+"name":"Sadanand Gurude",
+  "email": "sadanandgurude9@gmail.com",
+  "mob_no": "7796486647",
+  "gender": "male",
+  "ins_prov": "tata",
+  "ins_num": "12345t",
+  "current_med": "na",
+  "past_med_his": "na",
+  "id_type": "aadhar",
+  "id_num": "944436826161"
+
+
+name, email, mob_no, dob, gender, ins_prov,
+ins_num, allergy, current_med, family_med_his,
+past_med_his, id_type, id_num
