@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import mongoose from 'mongoose';
+import mongoose, {Schema, model} from 'mongoose';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -24,7 +24,7 @@ const connectDB = async () => {
 connectDB();
 
 // Define the User model
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
     name: { type: String, required: true },
     email: { type: String, required: true },
     mob_no: { type: Number, required: true },
@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema({
     id_num: { type: Number, required: true },
 });
 
-const User = mongoose.model('User', userSchema);
+const User = model("User", userSchema);
 
 const PORT = process.env.PORT || 5000;
 
