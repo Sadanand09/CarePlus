@@ -10,18 +10,20 @@ const PatientForm = () => {
 
             </section>
             <form className=' space-y-6 flex-1'>
-            <div>
-                <p>Full Name</p>
-                <input className='w-96 p-2' placeholder='John Doe'/>
-            </div>
-            <div>
-                <p>Full Name</p>
-                <input className='w-96 p-2' type='text' placeholder='John Doe'/>
-            </div>
-            <div>
-                <p>Email</p>
-                <input className='w-96 p-2' type='email' placeholder='John Doe'/>
-            </div>
+                <div>
+                    <p>Full Name</p>
+                    <input className='w-96 p-2' type='text' placeholder='John Doe' />
+                </div>
+                <div>
+                    <p>Email</p>
+                    <input className='w-96 p-2' type='email' placeholder='johndoe@gmail.com' />
+                </div>
+                <div>
+                    <p>Phone number</p>
+                    <input className='w-96 p-2' type='tel' placeholder='John Doe' />
+                </div>
+
+                <button className='bg-[#24AE7C] w-96 p-2'>Get Started</button>
             </form>
 
 

@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import mongoose, {Schema, model} from 'mongoose';
+import mongoose, {Schema, model, trusted} from 'mongoose';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -30,8 +30,13 @@ const userSchema = new Schema({
     mob_no: { type: Number, required: true },
     dob: { type: Date, required: true },
     gender: { type: String, required: true },
+    address: {type:String, required: true},
+    occupation: {type: String, required: true},
+    emergencyname: {type: String, required: true},
+    emergencynum: {type: Number, required: true},
+    physician: {type: String, required: true},
     ins_prov: { type: String, required: true },
-    ins_num: { type: Number, required: true },
+    ins_num: { type: Number, required: true }, 
     allergy: { type: String },
     current_med: { type: String, required: true },
     family_med_his: { type: String },
@@ -53,10 +58,10 @@ app.get("/health", (req, res) => {
 });
 
 app.post("/careplus", async (req, res) => {
-    const { name, email, mob_no, dob, gender, ins_prov, ins_num, allergy, current_med, family_med_his, past_med_his, id_type, id_num } = req.body;
+    const { name, email, mob_no, dob, gender, address,occupation, emergencyname, emergencynum, physician, ins_prov, ins_num, allergy, current_med, family_med_his, past_med_his, id_type, id_num } = req.body;
 
     // Simple validation for required fields
-    const requiredFields = { name, email, mob_no, dob, gender, ins_prov, ins_num, current_med, past_med_his, id_type, id_num };
+    const requiredFields = { name, email, mob_no, dob, address, physician, gender, ins_prov, ins_num, current_med, past_med_his, id_type, id_num };
     for (const [field, value] of Object.entries(requiredFields)) {
         if (!value) {
             return res.json({
@@ -73,6 +78,11 @@ app.post("/careplus", async (req, res) => {
             email,
             mob_no,
             dob,
+            address,
+            occupation,
+            emergencyname, 
+            emergencynum,
+            physician,
             gender,
             ins_prov,
             ins_num,

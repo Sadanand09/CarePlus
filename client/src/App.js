@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Toaster } from 'react-hot-toast';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import './App.css';
 import Home from './view/Home/Home';
@@ -19,19 +20,20 @@ function App() {
     },
     {
       path: "/login",
-      element: <Login/>
+      element: <Login />
     }
   ])
 
   const root = ReactDOM.createRoot(document.getElementById('root'));
   root.render(<>
+    <Toaster />
     <RouterProvider router={router} />
   </>
 
   );
   return (
     <div className="App">
-      
+
     </div>
   );
 }
