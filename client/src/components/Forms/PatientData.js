@@ -24,7 +24,7 @@ function PatientData() {
 
     const addPatient = async () => {
         try {
-            const response = await axios.post(`${process.env.REACT_APP_API_URL}/carepulse`, {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/careplus`, {
                 name,
                 email,
                 mob_no,
