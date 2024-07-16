@@ -6,6 +6,7 @@ import './App.css';
 import Home from './view/Home/Home';
 import Form from './view/Form/Form';
 import Login from './view/Login/Login';
+import Admin from './view/Admin/Admin';
 
 function App() {
 
@@ -21,6 +22,10 @@ function App() {
     {
       path: "/login",
       element: <Login />
+    },
+    {
+      path: "admin",
+      element: <Admin/>
     }
   ])
 
