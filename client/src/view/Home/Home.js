@@ -5,8 +5,8 @@ function Home() {
   return (
     <div className='flex h-screen max-h-screen'>
 
-      <section className=' remove-scrollbar container ms-36'>
-        <div className='sub-container max-w-[496px] '>
+      <center className=' remove-scrollbar container '>
+        <div className='sub-container max-w-[496px] text-left '>
           <div className='h-screen flex flex-col justify-center'>
             <img
               src="/assets/icons/logo-full.svg"
@@ -27,7 +27,7 @@ function Home() {
 
         </div>
 
-      </section>
+      </center>
 
       <img
         src="/assets/images/onboarding-img.png"

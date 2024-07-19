@@ -31,20 +31,37 @@ function Admin() {
                 <h1 className="text-4xl font-semibold">Welcome, Admin</h1>
                 <p>Start day with messaging new appointments</p>
             </div>
-            <div className="max-w-lg mx-auto my-4 p-4 rounded-lg shadow-md">
-                <table className="table-fixed">
-                    <thead>
+            <div className="w-screen mt-11 container mx-auto my-4 p-4 text-lg shadow-md w-200vw overflow-x-auto">
+                <table className="table-fixed ">
+                    <thead className=' border-b-2 border-gray-200'>
                         <tr>
-                            <th className=" px-2 py-2">Patient</th>
-                            <th className=" px-2 py-2">Date</th>
-                            <th className=" px-2 py-2">Phone</th>
-                            <th className=" px-2 py-2">Email</th>
-                            <th className=" px-2 py-2">Doctor</th>
+                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Patient</th>
+                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Date</th>
+                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Phone</th>
+                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Email</th>
+                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Doctor</th>
                         </tr>
                     </thead>
                     <tbody>
                         {patients.map((patient) => {
-                            const { _id, name, dob, mob_no, email, physician } = patient;
+                            const { _id, name,
+                                email,
+                                mob_no,
+                                dob,
+                                gender,
+                                address,
+                                occupation,
+                                emergencyname,
+                                emergencynum,
+                                physician,
+                                ins_prov,
+                                ins_num,
+                                allergy,
+                                current_med,
+                                family_med_his,
+                                past_med_his,
+                                id_type,
+                                id_num } = patient;
                             return (
                                 <PatientCard
                                     key={_id}
@@ -54,6 +71,19 @@ function Admin() {
                                     mob_no={mob_no}
                                     email={email}
                                     physician={physician}
+                                    gender={gender}
+                                    address={address}
+                                    occupation={occupation}
+                                    emergencyname={emergencyname}
+                                    emergencynum={emergencynum}
+                                    ins_prov={ins_prov}
+                                    ins_num={ins_num}
+                                    allergy={allergy}
+                                    current_med={current_med}
+                                    family_med_his={family_med_his}
+                                    past_med_his={past_med_his}
+                                    id_type={id_type}
+                                    id_num={id_num}
                                 />
                             );
                         })}

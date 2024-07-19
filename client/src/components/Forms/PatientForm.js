@@ -11,19 +11,29 @@ const PatientForm = () => {
             </section>
             <form className=' space-y-6 flex-1'>
                 <div>
-                    <p>Full Name</p>
-                    <input className='w-96 p-2' type='text' placeholder='John Doe' />
+                    <p className='pb-3'>Full Name</p>
+                    <div className='flex bg-[#1A1D21] px-4 w-full border-gray-50 rounded-md'>
+                        <img src='/assets/icons/user.svg ' />
+                        <input className='ms-2 w-full bg-transparent py-3 border-none' type='text' placeholder='John Doe' />
+                    </div>
+
                 </div>
                 <div>
                     <p>Email</p>
-                    <input className='w-96 p-2' type='email' placeholder='johndoe@gmail.com' />
+                    <div className='flex bg-[#1A1D21] px-4 w-full border-gray-50 rounded-md'>
+                        <img src='/assets/icons/email.svg' />
+                        <input className='ms-2 w-96 py-3 bg-transparent' type='email' placeholder='johndoe@gmail.com' />
+                    </div>
                 </div>
                 <div>
                     <p>Phone number</p>
-                    <input className='w-96 p-2' type='tel' placeholder='John Doe' />
+                    <div className='flex bg-[#1A1D21] px-4 w-full border-gray-50 rounded-md'>
+                        
+                        <input className='w-96 py-3 bg-transparent' type='tel' placeholder='23249798439' />
+                    </div>
                 </div>
 
-                <button className='bg-[#24AE7C] w-96 p-2'>Get Started</button>
+                <button className='bg-[#24AE7C] w-full p-2'>Get Started</button>
             </form>
 
 
