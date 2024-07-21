@@ -8,7 +8,7 @@ function Admin() {
 
     const loadData = async () => {
         try {
-            const response = await axios.get("http://localhost:5000/careplus");
+            const response = await axios.get(`http://localhost:${process.env.REACT_APP_PORT}/careplus`);
             setPatients(response.data.data);
         } catch (error) {
             console.error('Error fetching data:', error);
