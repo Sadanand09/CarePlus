@@ -34,7 +34,7 @@ function Form() {
         src="assets/images/register-img.png"
         height={1000}
         width={1000}
-        className='side-img max-w-[25%]'
+        className='side-img max-w-[25%] fixed right-0'
       />
     </div>
   )

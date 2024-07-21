@@ -40,10 +40,25 @@ function Admin() {
                             <th className="p-5 text-xl text-left font-semibold tracking-wide">Phone</th>
                             <th className="p-5 text-xl text-left font-semibold tracking-wide">Email</th>
                             <th className="p-5 text-xl text-left font-semibold tracking-wide">Doctor</th>
+                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Gender</th>
+                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Address</th>
+                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Occupation</th>
+                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Emergency name</th>
+                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Emergency num</th>
+                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Insurance</th>
+                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Insurance number</th>
+                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Allergies</th>
+                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Current Med.</th>
+                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Family Med. History</th>
+                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Past Med. History</th>
+                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Id type</th>
+                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Id number</th>
+                            
+
                         </tr>
                     </thead>
                     <tbody>
-                        {patients.map((patient) => {
+                        {patients.map((patient, index) => {
                             const { _id, name,
                                 email,
                                 mob_no,
@@ -65,6 +80,7 @@ function Admin() {
                             return (
                                 <PatientCard
                                     key={_id}
+                                    index={index}
                                     _id={_id}
                                     name={name}
                                     dob={dob}

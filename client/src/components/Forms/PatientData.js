@@ -316,9 +316,9 @@ function PatientData() {
 
             <h1 className='font-semibold mt-7 text-2xl'>Identification and Verification</h1>
 
-            <div className='mt-7'>
+            <div className='mt-7 bg-[#1A1D21] w-3/4 rounded-lg border  border-gray-600'>
                 <select
-                    className='p-2 w-3/4 bg-[#1A1D21] rounded-lg outline-none'
+                    className='py-3 px-2 w-full  bg-transparent outline-none'
                     placeholder='Birth Certificate'
                     value={id_type}
                     onChange={(e) => setId_type(e.target.value)}>
@@ -341,7 +341,7 @@ function PatientData() {
                 <div className='bg-[#1A1D21] rounded-lg border  border-gray-600'>
 
                     <input
-                        className='p-2 w-3/4 outline-none bg-transparent'
+                        className='py-3 px-2 w-3/4 outline-none bg-transparent'
                         placeholder='387498'
                         value={id_num}
                         onChange={(e) => setId_num(e.target.value)}
