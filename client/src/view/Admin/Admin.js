@@ -1,86 +1,75 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import PatientCard from '../../components/PatientCard/PatientCard';
+
+import PatientCard from '../../components/PatientCard/PatientDetails';
 
 function Admin() {
     const [patients, setPatients] = useState([]);
 
-    const loadData = async () => {
+
+    const patientDetails = async () => {
         try {
+           
             const response = await axios.get(`http://localhost:${process.env.REACT_APP_PORT}/careplus`);
             setPatients(response.data.data);
         } catch (error) {
             console.error('Error fetching data:', error);
+            
         }
     };
 
     useEffect(() => {
-        loadData();
+        
+        patientDetails();
     }, []);
 
     return (
         <div>
+            {/* Logo */}
             <img
                 src="/assets/icons/logo-full.svg"
                 height={1000}
                 width={1000}
-                className="m-12 h-10 w-fit"
+                className="ms-20 m-12 h-10 w-fit"
+                alt="Logo"
             />
+            {/* Welcome Message */}
             <div className="ms-20">
                 <h1 className="text-4xl font-semibold">Welcome, Admin</h1>
-                <p>Start day with messaging new appointments</p>
+                <p>Start your day by messaging new appointments</p>
             </div>
+            {/* Patient Table */}
             <div className="w-screen mt-11 container mx-auto my-4 p-4 text-lg shadow-md w-200vw overflow-x-auto">
-                <table className="table-fixed ">
-                    <thead className=' border-b-2 border-gray-200'>
+                <table className="table-fixed">
+                    <thead className='border-b-2 border-gray-200'>
                         <tr>
-                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Patient</th>
-                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Date</th>
-                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Phone</th>
-                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Email</th>
-                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Doctor</th>
-                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Gender</th>
-                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Address</th>
-                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Occupation</th>
-                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Emergency name</th>
-                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Emergency num</th>
-                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Insurance</th>
-                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Insurance number</th>
-                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Allergies</th>
-                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Current Med.</th>
-                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Family Med. History</th>
-                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Past Med. History</th>
-                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Id type</th>
-                            <th className="p-5 text-xl text-left font-semibold tracking-wide">Id number</th>
-                            
-
+                            {/* Table Headers */}
+                            {[
+                                'Patient', 'Date', 'Phone', 'Email', 'Doctor', 'Gender',
+                                'Address', 'Occupation', 'Emergency Name', 'Emergency Num',
+                                'Insurance', 'Insurance Number', 'Allergies', 'Current Med.',
+                                'Family Med. History', 'Past Med. History', 'ID Type', 'ID Number'
+                            ].map(header => (
+                                <th
+                                    key={header}
+                                    className="p-5 text-xl text-left font-semibold tracking-wide"
+                                >
+                                    {header}
+                                </th>
+                            ))}
                         </tr>
                     </thead>
                     <tbody>
-                        {patients.map((patient, index) => {
-                            const { _id, name,
-                                email,
-                                mob_no,
-                                dob,
-                                gender,
-                                address,
-                                occupation,
-                                emergencyname,
-                                emergencynum,
-                                physician,
-                                ins_prov,
-                                ins_num,
-                                allergy,
-                                current_med,
-                                family_med_his,
-                                past_med_his,
-                                id_type,
-                                id_num } = patient;
+                        {/* Map through patients and display each one */}
+                        {patients.map((patient) => {
+                            const {
+                                _id, name, email, mob_no, dob, gender, address, occupation,
+                                emergencyname, emergencynum, physician, ins_prov, ins_num,
+                                allergy, current_med, family_med_his, past_med_his, id_type, id_num
+                            } = patient;
                             return (
                                 <PatientCard
                                     key={_id}
-                                    index={index}
                                     _id={_id}
                                     name={name}
                                     dob={dob}

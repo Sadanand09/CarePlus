@@ -1,7 +1,8 @@
 import express from 'express';
 import cors from 'cors';
-import mongoose, {Schema, model, trusted} from 'mongoose';
+import mongoose, { Schema, model } from 'mongoose';
 import dotenv from 'dotenv';
+
 dotenv.config();
 
 const app = express();
@@ -11,10 +12,7 @@ app.use(express.json());
 // Connect to the database
 const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.MONGODB_URL, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
+        await mongoose.connect(process.env.MONGODB_URL); // Removed deprecated options
         console.log("Database connected");
     } catch (error) {
         console.error("Database connection error:", error);
@@ -30,11 +28,11 @@ const userSchema = new Schema({
     mob_no: { type: Number, required: true },
     dob: { type: Date, required: true },
     gender: { type: String, required: true },
-    address: {type:String, required: true},
-    occupation: {type: String, required: true},
-    emergencyname: {type: String, required: true},
-    emergencynum: {type: Number, required: true},
-    physician: {type: String, required: true},
+    address: { type: String, required: true },
+    occupation: { type: String, required: true },
+    emergencyname: { type: String, required: true },
+    emergencynum: { type: Number, required: true },
+    physician: { type: String, required: true },
     ins_prov: { type: String, required: true },
     ins_num: { type: Number, required: true }, 
     allergy: { type: String },
@@ -58,7 +56,7 @@ app.get("/health", (req, res) => {
 });
 
 app.post("/careplus", async (req, res) => {
-    const { name, email, mob_no, dob, gender, address,occupation, emergencyname, emergencynum, physician, ins_prov, ins_num, allergy, current_med, family_med_his, past_med_his, id_type, id_num } = req.body;
+    const { name, email, mob_no, dob, gender, address, occupation, emergencyname, emergencynum, physician, ins_prov, ins_num, allergy, current_med, family_med_his, past_med_his, id_type, id_num } = req.body;
 
     // Simple validation for required fields
     const requiredFields = { name, email, mob_no, dob, address, physician, gender, ins_prov, ins_num, current_med, past_med_his, id_type, id_num };
@@ -122,6 +120,26 @@ app.get("/careplus", async (req, res) => {
         res.json({
             success: false,
             message: 'Error fetching users',
+            data: null
+        });
+    }
+});
+
+
+app.delete("/careplus/:id", async (req, res) => {
+    const { id } = req.params;
+    try {
+        await User.findByIdAndDelete(id);
+        res.json({
+            success: true,
+            message: "Appointment deleted successfully",
+            data: null
+        });
+    } catch (error) {
+        console.error('Error deleting appointment:', error);
+        res.json({
+            success: false,
+            message: 'Error deleting appointment',
             data: null
         });
     }

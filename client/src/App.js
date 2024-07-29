@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Toaster } from 'react-hot-toast';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import './App.css';
+
+
 import Home from './view/Home/Home';
 import Form from './view/Form/Form';
-import Login from './view/Login/Login';
 import Admin from './view/Admin/Admin';
+import Message from './view/SuccessMessage/Message';
 
 function App() {
 
@@ -20,8 +21,8 @@ function App() {
       element: <Form />
     },
     {
-      path: "/login",
-      element: <Login />
+      path: "/message",
+      element: <Message />
     },
     {
       path: "admin",

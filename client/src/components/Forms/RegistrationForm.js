@@ -1,8 +1,18 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
-function PatientData() {
+function RegistrationForm() {
+    const navigate = useNavigate();
+
+    
+    const handleSubmit = () => {
+        navigate('/message');
+    };
+
+
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [mob_no, setMob_no] = useState('');
@@ -21,6 +31,7 @@ function PatientData() {
     const [past_med_his, setPast_med_his] = useState('');
     const [id_type, setId_type] = useState('');
     const [id_num, setId_num] = useState('');
+
 
     const addPatient = async () => {
         try {
@@ -54,7 +65,7 @@ function PatientData() {
             setOccupation('');
             setEmergencyname('');
             setEmergencynum('');
-            setPhysician('');  // corrected this line
+            setPhysician(''); 
             setIns_prov('');
             setIns_num('');
             setAllergy('');
@@ -68,10 +79,15 @@ function PatientData() {
         }
     };
 
+    const handleClick = () => {
+        addPatient();
+        handleSubmit();
+    };
+
     return (
         <>
             <h1 className='font-semibold text-2xl mt-11 mb-7 '>Personal Information</h1>
-            <div className='flex bg-[#1A1D21] w-3/4 rounded-lg border border-gray-600'>
+            <div className='flex bg-[#1A1D21] w-8/12 rounded-lg border border-gray-600'>
                 <img className='px-3' src='/assets/icons/user.svg ' />
                 <input
                     className='w-full py-3 px-2 bg-transparent outline-none'
@@ -81,7 +97,7 @@ function PatientData() {
                 />
             </div>
 
-            <div className='flex w-3/4 mt-7 '>
+            <div className='flex w-8/12 mt-7 '>
                 <div className='w-1/2 '>
                     <p className='mb-3 text-sm text-gray-300'>Email Address</p>
                     <div className='flex bg-[#1A1D21] rounded-lg border  border-gray-600'>
@@ -108,7 +124,7 @@ function PatientData() {
                 </div>
             </div>
 
-            <div className='flex w-3/4 mt-7'>
+            <div className='flex w-8/12 mt-7'>
                 <div className='w-1/2'>
                     <p className='mb-3 text-sm text-gray-300'>Date of Birth</p>
                     <div className='bg-[#1A1D21] rounded-lg border  border-gray-600'>
@@ -159,7 +175,7 @@ function PatientData() {
                 </div>
             </div>
 
-            <div className='flex w-3/4 mt-7'>
+            <div className='flex w-8/12 mt-7'>
                 <div className='w-1/2'>
                     <p className='mb-3 text-sm text-gray-300'>Address</p>
                     <div className='bg-[#1A1D21] rounded-lg border  border-gray-600'>
@@ -186,7 +202,7 @@ function PatientData() {
                 </div>
             </div>
 
-            <div className='flex w-3/4 mt-7'>
+            <div className='flex w-8/12 mt-7'>
                 <div className='w-1/2'>
                     <p className='mb-3 text-sm text-gray-300'>Emergency contact name</p>
                     <div className='bg-[#1A1D21] rounded-lg border  border-gray-600'>
@@ -217,7 +233,7 @@ function PatientData() {
 
             <div className='mt-7'>
                 <select
-                    className='py-3 px-2 w-3/4 bg-[#1A1D21] rounded-lg border border-gray-600 outline-none'
+                    className='py-3 px-2 w-8/12 bg-[#1A1D21] rounded-lg border border-gray-600 outline-none'
                     placeholder='Select a physician'
                     value={physician}
                     onChange={(e) => setPhysician(e.target.value)}>
@@ -233,7 +249,7 @@ function PatientData() {
                 </select>
             </div>
 
-            <div className='flex w-3/4 mt-7'>
+            <div className='flex w-8/12 mt-7'>
                 <div className='w-1/2'>
                     <p className='mb-3 text-sm text-gray-300'>Insurance Provider</p>
                     <div className='bg-[#1A1D21] rounded-lg border  border-gray-600'>
@@ -260,7 +276,7 @@ function PatientData() {
                 </div>
             </div>
 
-            <div className='flex w-3/4 mt-7'>
+            <div className='flex w-8/12 mt-7'>
                 <div className='w-1/2'>
                     <p className='mb-3 text-sm text-gray-300'>Allergies</p>
                     <div className='bg-[#1A1D21] rounded-lg border  border-gray-600'>
@@ -287,7 +303,7 @@ function PatientData() {
                 </div>
             </div>
 
-            <div className='flex w-3/4 mt-7'>
+            <div className='flex w-8/12 mt-7'>
                 <div className='w-1/2'>
                     <p className='mb-3 text-sm text-gray-300'>Family Medical History</p>
                     <div className='bg-[#1A1D21] rounded-lg border  border-gray-600'>
@@ -316,7 +332,7 @@ function PatientData() {
 
             <h1 className='font-semibold mt-7 text-2xl'>Identification and Verification</h1>
 
-            <div className='mt-7 bg-[#1A1D21] w-3/4 rounded-lg border  border-gray-600'>
+            <div className='mt-7 bg-[#1A1D21] w-8/12 rounded-lg border  border-gray-600'>
                 <select
                     className='py-3 px-2 w-full  bg-transparent outline-none'
                     placeholder='Birth Certificate'
@@ -336,7 +352,7 @@ function PatientData() {
                 </select>
             </div>
 
-            <div className='mt-7 w-3/4'>
+            <div className='mt-7 w-8/12'>
                 <p className='mb-3 text-sm text-gray-300'>ID Number</p>
                 <div className='bg-[#1A1D21] rounded-lg border  border-gray-600'>
 
@@ -366,11 +382,11 @@ function PatientData() {
 
             </div>
 
-            <button onClick={addPatient} className='mt-7 p-2 w-3/4 bg-[#24AE7C] text-white'>
+            <button onClick={handleClick} className='mt-7 p-2 w-8/12 bg-[#24AE7C] text-white'>
                 Submit and Continue
             </button>
         </>
     );
 }
 
-export default PatientData;
+export default RegistrationForm;
