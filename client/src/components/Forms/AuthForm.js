@@ -18,7 +18,7 @@ const AuthForm = () => {
       <form className='space-y-6 flex-1'>
         <div>
           <p className='pb-3'>Full Name</p>
-          <div className='flex items-center bg-[#1A1D21] px-4 w-4/12  rounded-lg border border-gray-600'>
+          <div className='flex items-center bg-[#1A1D21] px-4 w-4/12 text-  rounded-lg border border-gray-600'>
             <img src='/assets/icons/user.svg' alt='user icon' />
             <input
               className='ms-2 w-full bg-transparent py-3 outline-none'

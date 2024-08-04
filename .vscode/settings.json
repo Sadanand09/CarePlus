@@ -1,3 +1,8 @@
 {
-    "editor.lightbulb.enabled": "on"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.lightbulb.enabled": "on",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
