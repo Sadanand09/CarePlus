@@ -27,6 +27,8 @@ function PatientDetails({
   const [patientModal, setPatientModal] = React.useState(false);
   const [cancelModal, setCancelModal] = React.useState(false);
   const [scheduleModal, setScheduleModal] = React.useState(false);
+  const [scheduleStatus, setScheduleStatus] = React.useState("pending"); // New state variable to track status
+  const [cancelStatus, setCancelStatus] = React.useState("Cancel")
 
   const reloadPage = () => {
     window.location.reload();
@@ -41,15 +43,31 @@ function PatientDetails({
     reloadPage();
   };
 
+  const handleScheduleAppointment = async (e) => {
+    e.preventDefault();
+    // Simulate scheduling process or make an API call here
+    // After successful scheduling, update the status
+    setScheduleStatus("scheduled");
+    setScheduleModal(false);
+  };
+
+  const handleCancelAppointment = async (e) => {
+    e.preventDefault();
+
+    setCancelStatus("canceled");
+    setCancelModal(false);
+    setScheduleModal(false);
+  }
+
   return (
     <>
       <div className="w-full m-3">
-        <div className="p-4 flex justify-between w- bg-gray-600 rounded-md ">
+        <div className="p-4 flex justify-between bg-gray-600 rounded-md ">
           <div
             className="flex cursor-pointer"
             onClick={() => setPatientModal(!patientModal)}
           >
-            <div className="">
+            <div>
               <p>Name:</p>
               <p>Gender:</p>
               <p>Phone:</p>
@@ -57,31 +75,39 @@ function PatientDetails({
             </div>
             <div className="ms-2">
               <p>{name}</p>
-              <p> {gender}</p>
-              <p> {mob_no}</p>
+              <p>{gender}</p>
+              <p>{mob_no}</p>
               <p>{email}</p>
             </div>
           </div>
           <div className="flex flex-col">
             <button
               onClick={() => setScheduleModal(!scheduleModal)}
-              className=" text-green-500 hover:border border-gray-400 rounded-full  m-2 p-2 text-center"
+              className={`${
+                scheduleStatus === "scheduled"
+                  ? "text-[#24AE7C] cursor-not-allowed"
+                  : "text-yellow-500 hover:border border-gray-400"
+              } rounded-full m-2 p-2 text-center`}
+              disabled={scheduleStatus === "scheduled"}
             >
-              Schedule
+              {scheduleStatus === "pending" ? "Pending" : "Scheduled"}
             </button>
 
             <button
               onClick={() => setCancelModal(!cancelModal)}
-              className=" text-[#F24E43] hover:border border-gray-400 rounded-full m-2 p-2 text-center"
+              className={`${
+                cancelStatus === "canceled"
+                  ? "text-red-800 cursor-not-allowed"
+                  : "text-[#F24E43] hover:border border-gray-400 rounded-full m-2 p-2 text-center"
+              }`}
             >
-              Cancel
+              {cancelStatus === "cancel" ? "Cancel" : "Canceled"}
             </button>
           </div>
         </div>
       </div>
 
       {/*Patient Modal*/}
-
       {patientModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-40">
           <div className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -167,7 +193,6 @@ function PatientDetails({
       )}
 
       {/*Cancel Modal*/}
-
       {cancelModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-40">
           <div className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -176,9 +201,9 @@ function PatientDetails({
                 <div className="flex items-center justify-between p-4 md:p-5 b rounded-t ">
                   <div>
                     <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                      Cancle Appointment
+                      Cancel Appointment
                     </h3>
-                    <p>Are you sure you want to cancle your appointment?</p>
+                    <p>Are you sure you want to cancel your appointment?</p>
                   </div>
 
                   <button
@@ -204,19 +229,22 @@ function PatientDetails({
                   </button>
                 </div>
                 <div className="p-4 md:p-5">
-                  <form className="space-y-4" action="#">
+                  <form
+                    className="space-y-4"
+                    onSubmit={handleCancelAppointment}
+                  >
                     <div>
                       <label
-                        htmlFor="email"
+                        htmlFor="cancelReason"
                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                       >
-                        Reason for cancelation
+                        Reason for cancellation
                       </label>
                       <textarea
-                        type="text"
+                        id="cancelReason"
                         rows="3"
                         cols="50"
-                        className="text-white text-sm  block w-full p-2.5 bg-transparent outline-none rounded-lg border border-gray-600 "
+                        className="text-white text-sm block w-full p-2.5 bg-transparent outline-none rounded-lg border border-gray-600 "
                         placeholder="ex: Urgent meeting came up"
                         required
                       />
@@ -224,10 +252,10 @@ function PatientDetails({
 
                     <button
                       type="submit"
-                      className="w-full text-white bg-[#F24E43]  focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center "
-                      onClick={() => {
-                        deleteAppointment(_id);
-                      }}
+                      className="w-full text-white bg-[#F24E43] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                      // onClick={() => {
+                      //   deleteAppointment(_id);
+                      // }}
                     >
                       Cancel appointment
                     </button>
@@ -240,7 +268,6 @@ function PatientDetails({
       )}
 
       {/*Schedule Modal*/}
-
       {scheduleModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-40">
           <div className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -277,19 +304,22 @@ function PatientDetails({
                   </button>
                 </div>
                 <div className="p-4 md:p-5">
-                  <form className="space-y-4" action="#">
+                  <form
+                    className="space-y-4"
+                    onSubmit={handleScheduleAppointment}
+                  >
                     <div>
                       <label
-                        htmlFor="email"
+                        htmlFor="scheduleReason"
                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                       >
                         Reason for appointment
                       </label>
                       <textarea
-                        type="text"
+                        id="scheduleReason"
                         rows="3"
                         cols="50"
-                        className="text-white text-sm  block w-full p-2.5 bg-transparent outline-none rounded-lg border border-gray-600 "
+                        className="text-white text-sm block w-full p-2.5 bg-transparent outline-none rounded-lg border border-gray-600 "
                         placeholder="ex: Annual monthly check-up"
                         required
                       />
@@ -297,7 +327,7 @@ function PatientDetails({
 
                     <button
                       type="submit"
-                      className="w-full text-white bg-[#24AE7C]  focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+                      className="w-full text-white bg-[#24AE7C] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                     >
                       Schedule appointment
                     </button>
