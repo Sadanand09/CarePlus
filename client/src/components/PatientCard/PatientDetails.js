@@ -27,42 +27,53 @@ function PatientDetails({
   const [patientModal, setPatientModal] = React.useState(false);
   const [cancelModal, setCancelModal] = React.useState(false);
   const [scheduleModal, setScheduleModal] = React.useState(false);
-  const [scheduleStatus, setScheduleStatus] = React.useState("pending"); // New state variable to track status
-  const [cancelStatus, setCancelStatus] = React.useState("Cancel")
+  const [scheduleStatus, setScheduleStatus] = React.useState("pending");
+  const [cancelStatus, setCancelStatus] = React.useState("Cancel");
 
   const reloadPage = () => {
     window.location.reload();
   };
 
-  const deleteAppointment = async (patientId) => {
-    const response = await axios.delete(
-      `http://localhost:${process.env.REACT_APP_PORT}/careplus/${patientId}`
-    );
-
-    toast.success(response.data.message);
-    reloadPage();
+  const updateAppointmentStatus = async (patientId, statusType, statusValue) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:${process.env.REACT_APP_PORT}/careplus/updateStatus`,
+        {
+          patientId,
+          statusType,
+          statusValue,
+        }
+      );
+      toast.success(response.data.message);
+      reloadPage();
+    } catch (error) {
+      toast.error("Failed to update status.");
+    }
   };
 
   const handleScheduleAppointment = async (e) => {
     e.preventDefault();
-    // Simulate scheduling process or make an API call here
-    // After successful scheduling, update the status
     setScheduleStatus("scheduled");
     setScheduleModal(false);
+
+    // Save the schedule status to the database
+    await updateAppointmentStatus(_id, "scheduleStatus", "scheduled");
   };
 
   const handleCancelAppointment = async (e) => {
     e.preventDefault();
-
-    setCancelStatus("canceled");
+    setCancelStatus("Canceled");
     setCancelModal(false);
     setScheduleModal(false);
-  }
+
+    // Save the cancel status to the database
+    await updateAppointmentStatus(_id, "cancelStatus", "Canceled");
+  };
 
   return (
     <>
       <div className="w-full m-3">
-        <div className="p-4 flex justify-between bg-gray-600 rounded-md ">
+        <div className="p-4 flex justify-between bg-[#1A1D21] rounded-md ">
           <div
             className="flex cursor-pointer"
             onClick={() => setPatientModal(!patientModal)}
@@ -96,16 +107,20 @@ function PatientDetails({
             <button
               onClick={() => setCancelModal(!cancelModal)}
               className={`${
-                cancelStatus === "canceled"
+                cancelStatus === "Canceled"
                   ? "text-red-800 cursor-not-allowed"
                   : "text-[#F24E43] hover:border border-gray-400 rounded-full m-2 p-2 text-center"
               }`}
+              disabled={cancelStatus === "Canceled"}
             >
-              {cancelStatus === "cancel" ? "Cancel" : "Canceled"}
+              {cancelStatus === "Cancel" ? "Cancel" : "Canceled"}
             </button>
           </div>
         </div>
       </div>
+
+      {/* Modals for patient data, cancel, and schedule */}
+      {/* ... (rest of your modal code remains unchanged) */}
 
       {/*Patient Modal*/}
       {patientModal && (

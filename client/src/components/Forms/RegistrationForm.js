@@ -80,9 +80,29 @@ function RegistrationForm() {
     }
   };
 
+  const sendEmail = async() => {
+    let dataSend = {
+      email: email
+    };
+
+    const res = await fetch(
+      `http://localhost:${process.env.REACT_APP_PORT}/careplus`,
+      {
+        method: "post",
+        body: JSON.stringify(dataSend),
+        headers:{
+          Accept: "application/json",
+          "Content-type": "application/json",
+        },
+      }
+    );
+
+  }
+
   const handleClick = () => {
     addPatient();
     handleSubmit();
+    sendEmail();
   };
 
   return (
@@ -387,6 +407,8 @@ function RegistrationForm() {
           I acknowledge that I have reviewed and agree to the privacy policy
         </p>
       </div>
+
+      
 
       <button
         onClick={handleClick}
