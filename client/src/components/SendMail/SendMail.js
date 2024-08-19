@@ -25,7 +25,7 @@ function SendMail() {
   };
 
   return (
-    <div className="text-black bg-white">
+    <div className="text-black bg-gray-400">
       <form ref={form} onSubmit={sendEmail}>
         <label>Name</label>
         <input type="text" name="name" required />

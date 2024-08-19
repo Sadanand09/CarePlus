@@ -20,7 +20,7 @@ function Home() {
 
               <div className="text-sm mt-20 flex justify-between px-3 w-4/12 ">
                 <p className="text-gray-600">© 2024 CarePulse</p>
-                <AdminAccess/>
+                <AdminAccess />
               </div>
             </div>
           </div>

@@ -8,7 +8,7 @@ import Form from "./view/Form/Form";
 import Admin from "./view/Admin/Admin";
 import Message from "./view/SuccessMessage/Message";
 
-import SendMail1 from "./components/SendMail/SendMail";
+import Mail from "./view/Mail/Mail";
 
 function App() {
   const router = createBrowserRouter([
@@ -27,10 +27,6 @@ function App() {
     {
       path: "/admin",
       element: <Admin />,
-    },
-    {
-      path: "/admin-m",
-      element: <SendMail1 />,
     },
   ]);
 
