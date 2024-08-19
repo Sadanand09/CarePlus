@@ -5,8 +5,6 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-import nodemailer from "nodemailer";
-
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -48,39 +46,6 @@ const userSchema = new Schema({
 const User = model("User", userSchema);
 
 const PORT = process.env.PORT || 5000;
-
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: process.env.SMTP_PORT,
-  secure: false, // Use `true` for port 465, `false` for all other ports
-  auth: {
-    user: process.env.SMTP_MAIL ,
-    pass: process.env.SMTP_PASSWORD,
-  },
-});
-
-const sendEmail = expressAsyncHandler(async (req, res) => {
-  const { email } = req.body;
-  console.log(email);
-
-  let mailOptions = {
-    from: process.env.SMTP_HOST,
-    to: email,
-    subject: "Appointment status: SCHEDULED",
-    message: "Your appointment is scheduled.",
-  };
-
-  transporter.sendEmail(mailOptions, function (error, info){
-    if(error){
-        console.log(error);
-    }
-    else{
-        console.log("Email sent successfully!")
-    }
-  })
-});
-
-module.exports = { sendEmail };
 
 app.get("/health", (req, res) => {
   res.json({
