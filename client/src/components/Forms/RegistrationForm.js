@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
+import { FileUploaderRegular } from "@uploadcare/react-uploader";
 
 function RegistrationForm() {
   const navigate = useNavigate();
@@ -30,6 +29,7 @@ function RegistrationForm() {
   const [past_med_his, setPast_med_his] = useState("");
   const [id_type, setId_type] = useState("");
   const [id_num, setId_num] = useState("");
+  const [image, setImage] = useState("");
 
   const addPatient = async () => {
     try {
@@ -54,6 +54,7 @@ function RegistrationForm() {
           past_med_his,
           id_type,
           id_num,
+          image,
         }
       );
       toast.success(response.data.message);
@@ -75,6 +76,7 @@ function RegistrationForm() {
       setPast_med_his("");
       setId_type("");
       setId_num("");
+      setImage("");
     } catch (error) {
       toast.error("Failed to add patient");
     }
@@ -96,7 +98,7 @@ function RegistrationForm() {
           className="w-full py-3 px-2 bg-transparent outline-none"
           placeholder="John Doe"
           value={name}
-          maxLength={8}
+          maxLength={20}
           onChange={(e) => setName(e.target.value)}
         />
       </div>
@@ -367,6 +369,20 @@ function RegistrationForm() {
             onChange={(e) => setId_num(e.target.value)}
           />
         </div>
+      </div>
+      <div>
+        <FileUploaderRegular
+          pubkey="9b51718a8810981f5bc6"
+          maxLocalFileSizeBytes={50000000}
+          multiple={false}
+          imgOnly={true}
+          sourceList="local, camera, gdrive, gphotos"
+          classNameUploader="my-config uc-dark"
+          onFileUploadSuccess={(image) => {
+            console.log("Image added", image);
+            setImage([image]);
+          }}
+        />
       </div>
       <div>
         <h1 className="font-semibold mt-7 text-2xl">Consent and Privacy</h1>

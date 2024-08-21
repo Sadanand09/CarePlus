@@ -41,6 +41,7 @@ const userSchema = new Schema({
   past_med_his: { type: String, required: true },
   id_type: { type: String, required: true },
   id_num: { type: Number, required: true },
+  image: { type: String, required: true },
 });
 
 const User = model("User", userSchema);
@@ -75,6 +76,7 @@ app.post("/careplus", async (req, res) => {
     past_med_his,
     id_type,
     id_num,
+    image,
   } = req.body;
 
   // Simple validation for required fields
@@ -92,6 +94,7 @@ app.post("/careplus", async (req, res) => {
     past_med_his,
     id_type,
     id_num,
+    image,
   };
   for (const [field, value] of Object.entries(requiredFields)) {
     if (!value) {
@@ -123,6 +126,7 @@ app.post("/careplus", async (req, res) => {
       past_med_his,
       id_type,
       id_num,
+      image,
     });
 
     res.json({
