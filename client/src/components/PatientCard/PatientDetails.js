@@ -99,7 +99,7 @@ function PatientDetails({
 
   return (
     <>
-      <div className="w-full m-3">
+      <div className="w-full m-3 p-4">
         <div className="p-4 flex justify-between bg-[#1A1D21] rounded-md ">
           <div
             className="flex cursor-pointer"
@@ -118,6 +118,7 @@ function PatientDetails({
               <p>{email}</p>
             </div>
           </div>
+
           <div className="flex flex-col">
             <button
               onClick={() => setScheduleModal(!scheduleModal)}
@@ -153,7 +154,7 @@ function PatientDetails({
       {patientModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-40">
           <div className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-            <div className="relative p-4 w-4/12">
+            <div className="relative p-4 w-auto m-3">
               <div className="relative bg-white pt-4 pb-4 rounded-lg shadow dark:bg-black">
                 <div className="flex items-center justify-between p-4 md:p-5 b rounded-t ">
                   <div>
@@ -185,7 +186,7 @@ function PatientDetails({
                   </button>
                 </div>
                 <div className="p-5">
-                  <div className="flex">
+                  <div className="flex text-sm">
                     <div className="text-gray-600">
                       <p>Name:</p>
                       <p>Gender:</p>
@@ -207,7 +208,7 @@ function PatientDetails({
                       <p>I'd Number:</p>
                     </div>
                     <div className="ms-3 text-green-800">
-                      <p>{name}</p>
+                      <p >{name}</p>
                       <p>{gender}</p>
                       <p>{mob_no}</p>
                       <p>{email}</p>
@@ -226,8 +227,10 @@ function PatientDetails({
                       <p>{id_type}</p>
                       <p>{id_num}</p>
                     </div>
+                    
                   </div>
                   <div>{image}</div>
+                 
                 </div>
               </div>
             </div>

@@ -12,7 +12,10 @@ app.use(express.json());
 // Connect to the database
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URL); // Removed deprecated options
+    await mongoose.connect(process.env.MONGODB_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     console.log("Database connected");
   } catch (error) {
     console.error("Database connection error:", error);
@@ -79,15 +82,17 @@ app.post("/careplus", async (req, res) => {
     image,
   } = req.body;
 
-  // Simple validation for required fields
   const requiredFields = {
     name,
     email,
     mob_no,
     dob,
-    address,
-    physician,
     gender,
+    address,
+    occupation,
+    emergencyname,
+    emergencynum,
+    physician,
     ins_prov,
     ins_num,
     current_med,
@@ -96,9 +101,10 @@ app.post("/careplus", async (req, res) => {
     id_num,
     image,
   };
+
   for (const [field, value] of Object.entries(requiredFields)) {
     if (!value) {
-      return res.json({
+      return res.status(400).json({
         success: false,
         message: `${field} is required`,
         data: null,
@@ -112,12 +118,12 @@ app.post("/careplus", async (req, res) => {
       email,
       mob_no,
       dob,
+      gender,
       address,
       occupation,
       emergencyname,
       emergencynum,
       physician,
-      gender,
       ins_prov,
       ins_num,
       allergy,
@@ -136,7 +142,7 @@ app.post("/careplus", async (req, res) => {
     });
   } catch (error) {
     console.error("Error creating user:", error);
-    res.json({
+    res.status(500).json({
       success: false,
       message: "Error creating user",
       data: null,
@@ -154,7 +160,7 @@ app.get("/careplus", async (req, res) => {
     });
   } catch (error) {
     console.error("Error fetching users:", error);
-    res.json({
+    res.status(500).json({
       success: false,
       message: "Error fetching users",
       data: null,
@@ -168,14 +174,14 @@ app.delete("/careplus/:id", async (req, res) => {
     await User.findByIdAndDelete(id);
     res.json({
       success: true,
-      message: "Appointment deleted successfully",
+      message: "User deleted successfully",
       data: null,
     });
   } catch (error) {
-    console.error("Error deleting appointment:", error);
-    res.json({
+    console.error("Error deleting user:", error);
+    res.status(500).json({
       success: false,
-      message: "Error deleting appointment",
+      message: "Error deleting user",
       data: null,
     });
   }
