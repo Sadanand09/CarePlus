@@ -60,6 +60,7 @@ function Admin() {
             past_med_his,
             id_type,
             id_num,
+            image,
           } = patient;
           return (
             <PatientCard
@@ -83,6 +84,7 @@ function Admin() {
               past_med_his={past_med_his}
               id_type={id_type}
               id_num={id_num}
+              image={image}
             />
           );
         })}

@@ -24,6 +24,7 @@ function PatientDetails({
   id_type,
   id_num,
   index,
+  image,
 }) {
   const [patientModal, setPatientModal] = React.useState(false);
   const [cancelModal, setCancelModal] = React.useState(false);
@@ -226,6 +227,7 @@ function PatientDetails({
                       <p>{id_num}</p>
                     </div>
                   </div>
+                  <div>{image}</div>
                 </div>
               </div>
             </div>
