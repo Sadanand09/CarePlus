@@ -33,6 +33,28 @@ function RegistrationForm() {
 
   const addPatient = async () => {
     try {
+      console.log({
+        name,
+        email,
+        mob_no,
+        dob,
+        gender,
+        address,
+        occupation,
+        emergencyname,
+        emergencynum,
+        physician,
+        ins_prov,
+        ins_num,
+        allergy,
+        current_med,
+        family_med_his,
+        past_med_his,
+        id_type,
+        id_num,
+        image,
+      });
+
       const response = await axios.post(
         `http://localhost:${process.env.REACT_APP_PORT}/careplus`,
         {
@@ -82,8 +104,8 @@ function RegistrationForm() {
     }
   };
 
-  const handleClick = () => {
-    addPatient();
+  const handleClick = async () => {
+    await addPatient();
     handleSubmit();
   };
 
@@ -371,18 +393,20 @@ function RegistrationForm() {
         </div>
       </div>
       <div>
-        <FileUploaderRegular
-          pubkey="9b51718a8810981f5bc6"
-          maxLocalFileSizeBytes={50000000}
-          multiple={false}
-          imgOnly={true}
-          sourceList="local, camera, gdrive, gphotos"
-          classNameUploader="my-config uc-dark"
-          onFileUploadSuccess={(image) => {
-            console.log("Image added", image);
-            setImage([image]);
-          }}
-        />
+        <div>
+          <FileUploaderRegular
+            pubkey="9b51718a8810981f5bc6"
+            maxLocalFileSizeBytes={50000000}
+            multiple={false}
+            imgOnly={true}
+            sourceList="local, camera, gdrive, gphotos"
+            classNameUploader="my-config uc-dark"
+            onFileUploadSuccess={(file) => {
+              console.log("Image added", file);
+              setImage(file.cdnUrl); // Correctly store the image URL
+            }}
+          />
+        </div>
       </div>
       <div>
         <h1 className="font-semibold mt-7 text-2xl">Consent and Privacy</h1>
