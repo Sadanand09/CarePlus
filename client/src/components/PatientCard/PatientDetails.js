@@ -99,8 +99,8 @@ function PatientDetails({
 
   return (
     <>
-      <div className="w-full m-3 p-4">
-        <div className="p-4 flex justify-between bg-[#1A1D21] rounded-md ">
+      <div className="w-full p-4 ">
+        <div className="p-5 lg:flex sm:flex justify-between bg-[#1A1D21] rounded-md ">
           <div
             className="flex cursor-pointer"
             onClick={() => setPatientModal(!patientModal)}
