@@ -8,6 +8,7 @@ import Home from "./view/Home/Home";
 import Form from "./view/Form/Form";
 import Admin from "./view/Admin/Admin";
 import Message from "./view/SuccessMessage/Message";
+import NotFound from "./view/NotFound/NotFound";
 
 function App() {
   const router = createBrowserRouter([
@@ -27,6 +28,11 @@ function App() {
       path: "/admin",
       element: <Admin />,
     },
+    {
+      path: "*",
+      element: <NotFound/>
+    }
+    
   ]);
 
   const root = ReactDOM.createRoot(document.getElementById("root"));
