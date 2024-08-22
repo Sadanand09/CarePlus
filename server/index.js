@@ -56,6 +56,10 @@ const User = model("User", userSchema);
 
 const PORT = process.env.PORT || 5000;
 
+app.get("/", (req, res) => {
+  res.send("Working Clean")
+})
+
 app.get("/health", (req, res) => {
   res.json({
     success: true,
