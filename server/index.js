@@ -6,7 +6,12 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-app.use(cors({ origin: ["https://care-pulse-theta-bice.vercel.app"], methods: ["POST", "GET"], credentials: true }));
+app.use(
+  cors({
+    origin: ["https://care-pulse-theta-bice.vercel.app"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // Connect to the database

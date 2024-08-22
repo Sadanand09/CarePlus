@@ -56,7 +56,7 @@ function RegistrationForm() {
       });
 
       const response = await axios.post(
-        `http://localhost:${process.env.REACT_APP_PORT}/careplus`,
+        `${process.env.REACT_APP_PORT}/careplus`,
         {
           name,
           email,
