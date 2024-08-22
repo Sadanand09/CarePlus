@@ -30,10 +30,6 @@ function App() {
       element: <Admin />,
     },
     {
-      path: "/google",
-      element: <Signin/>
-    },
-    {
       path: "*",
       element: <NotFound/>
     }

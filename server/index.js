@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: ["care-pulse-njrb8fy92-sadanand09s-projects.vercel.app"], methods: ["POST", "GET"], credentials: true }));
 app.use(express.json());
 
 // Connect to the database
