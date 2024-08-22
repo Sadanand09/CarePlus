@@ -7,10 +7,7 @@ dotenv.config();
 
 const app = express();
 app.use(
-  cors({
-    origin: ["https://care-pulse-theta-bice.vercel.app"],
-    credentials: true,
-  })
+  cors()
 );
 app.use(express.json());
 
