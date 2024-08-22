@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -11,8 +11,8 @@ function RegistrationForm() {
     navigate("/message");
   };
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState(localStorage.getItem("username") || "");
+  const [email, setEmail] = useState(localStorage.getItem("email") || "");
   const [mob_no, setMob_no] = useState("");
   const [dob, setDob] = useState("");
   const [gender, setGender] = useState("");

@@ -6,19 +6,16 @@ import { signInWithPopup } from "firebase/auth";
 const AuthForm = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState(""); // State to store username
+  const [username, setUsername] = useState("");
 
   // Handles the Google Sign-in process
   const handleClick = () => {
     signInWithPopup(auth, provider)
       .then((data) => {
         setEmail(data.user.email);
-        setUsername(data.user.displayName); // Set the username from Google profile
+        setUsername(data.user.displayName);
         localStorage.setItem("email", data.user.email);
-        localStorage.setItem("username", data.user.displayName); // Store the username in localStorage
-
-        // Redirect the user to the /form route after successful login
-        navigate("/form");
+        localStorage.setItem("username", data.user.displayName);
       })
       .catch((error) => {
         console.error("Error during sign-in:", error);
@@ -28,16 +25,26 @@ const AuthForm = () => {
   // UseEffect to check for email and username in localStorage on component mount
   useEffect(() => {
     const storedEmail = localStorage.getItem("email");
-    const storedUsername = localStorage.getItem("username"); // Retrieve the stored username
+    const storedUsername = localStorage.getItem("username");
     if (storedEmail && storedUsername) {
       setEmail(storedEmail);
-      setUsername(storedUsername); // Set the stored username to the state
+      setUsername(storedUsername);
     }
   }, []);
 
+  // Update the localStorage whenever the email or username is changed
+  useEffect(() => {
+    localStorage.setItem("email", email);
+    localStorage.setItem("username", username);
+  }, [email, username]);
+
   // Navigates to the form page when the "Get Started" button is clicked
-  const handelGetStarted = () => {
-    navigate("/form");
+  const handleGetStarted = () => {
+    if (username && email) {
+      navigate("/form");
+    } else {
+      alert("Please provide both username and email.");
+    }
   };
 
   return (
@@ -56,8 +63,8 @@ const AuthForm = () => {
               className="ms-2 w-full bg-transparent py-3 outline-none"
               type="text"
               placeholder="John Doe"
-              value={username} // Pre-fill the input with the username
-               // Make the input read-only if you don't want it to be editable
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
         </div>
@@ -70,8 +77,8 @@ const AuthForm = () => {
               className="ms-2 w-full bg-transparent py-3 outline-none"
               type="email"
               placeholder="johndoe@gmail.com"
-              value={email} // Pre-fill the input with the email
-               // Make the input read-only if you don't want it to be editable
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
         </div>
@@ -89,9 +96,12 @@ const AuthForm = () => {
 
         <div className="md:w-5/12 sm:w-4/12">
           <button
-            type="submit"
-            className="bg-[#24AE7C] w-full p-3 mb-5 rounded-lg text-white"
-            onClick={handelGetStarted}
+            type="button"
+            className={`bg-[#24AE7C] w-full p-3 mb-5 rounded-lg text-white ${
+              !username || !email ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+            onClick={handleGetStarted}
+            disabled={!username || !email}
           >
             Get Started
           </button>
@@ -101,10 +111,10 @@ const AuthForm = () => {
       <div className="md:w-5/12 sm:w-4/12 mt-5">
         <button
           onClick={handleClick}
-          type="submit"
+          type="button"
           className="bg-white w-full p-3 rounded-lg text-black"
         >
-          Signin with Google
+          Sign in with Google
         </button>
       </div>
     </div>
