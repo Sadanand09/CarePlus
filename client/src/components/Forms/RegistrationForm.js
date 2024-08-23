@@ -111,11 +111,11 @@ function RegistrationForm() {
 
   return (
     <>
-      <div className="mx-auto mb-20">
+      <div className="mx-auto mb-20 p-3">
         <h1 className="font-semibold text-2xl mt-11 mb-7 ">
           Personal Information
         </h1>
-        <div className="flex bg-[#1A1D21] w-8/12 rounded-lg border border-gray-600">
+        <div className="flex bg-[#1A1D21] sm:w-8/12 rounded-lg border border-gray-600">
           <img className="px-3" src="/assets/icons/user.svg " />
           <input
             className="w-full py-3 px-2 bg-transparent outline-none"
@@ -126,7 +126,7 @@ function RegistrationForm() {
           />
         </div>
 
-        <div className="flex w-8/12 mt-7 ">
+        <div className="flex sm:w-8/12 mt-7 ">
           <div className="w-1/2 ">
             <p className="mb-3 text-sm text-gray-300">Email Address</p>
             <div className="flex bg-[#1A1D21] rounded-lg border  border-gray-600">
@@ -158,7 +158,7 @@ function RegistrationForm() {
           </div>
         </div>
 
-        <div className="flex w-8/12 mt-7">
+        <div className="flex sm:w-8/12 mt-7">
           <div className="w-1/2">
             <p className="mb-3 text-sm text-gray-300">Date of Birth</p>
             <div className="bg-[#1A1D21] rounded-lg border  border-gray-600">
@@ -208,7 +208,7 @@ function RegistrationForm() {
           </div>
         </div>
 
-        <div className="flex w-8/12 mt-7">
+        <div className="flex sm:w-8/12 mt-7">
           <div className="w-1/2">
             <p className="mb-3 text-sm text-gray-300">Address</p>
             <div className="bg-[#1A1D21] rounded-lg border  border-gray-600">
@@ -234,7 +234,7 @@ function RegistrationForm() {
           </div>
         </div>
 
-        <div className="flex w-8/12 mt-7">
+        <div className="flex sm:w-8/12 mt-7">
           <div className="w-1/2">
             <p className="mb-3 text-sm text-gray-300">Emergency contact name</p>
             <div className="bg-[#1A1D21] rounded-lg border  border-gray-600">
@@ -263,9 +263,9 @@ function RegistrationForm() {
 
         <h1 className="font-semibold text-2xl mt-7">Medical Information</h1>
 
-        <div className="mt-7">
+        <div className="mt-7 sm:w-8/12">
           <select
-            className="py-3 px-2 w-8/12 bg-[#1A1D21] rounded-lg border border-gray-600 outline-none"
+            className="py-3 px-2 w-full bg-[#1A1D21] rounded-lg border border-gray-600 outline-none"
             placeholder="Select a physician"
             value={physician}
             onChange={(e) => setPhysician(e.target.value)}
@@ -282,7 +282,7 @@ function RegistrationForm() {
           </select>
         </div>
 
-        <div className="flex w-8/12 mt-7">
+        <div className="flex sm:w-8/12 mt-7">
           <div className="w-1/2">
             <p className="mb-3 text-sm text-gray-300">Insurance Provider</p>
             <div className="bg-[#1A1D21] rounded-lg border  border-gray-600">
@@ -307,7 +307,7 @@ function RegistrationForm() {
           </div>
         </div>
 
-        <div className="flex w-8/12 mt-7">
+        <div className="flex sm:w-8/12 mt-7">
           <div className="w-1/2">
             <p className="mb-3 text-sm text-gray-300">Allergies</p>
             <div className="bg-[#1A1D21] rounded-lg border  border-gray-600">
@@ -332,7 +332,7 @@ function RegistrationForm() {
           </div>
         </div>
 
-        <div className="flex w-8/12 mt-7">
+        <div className="flex sm:w-8/12 mt-7">
           <div className="w-1/2">
             <p className="mb-3 text-sm text-gray-300">Family Medical History</p>
             <div className="bg-[#1A1D21] rounded-lg border  border-gray-600">
@@ -361,7 +361,7 @@ function RegistrationForm() {
           Identification and Verification
         </h1>
 
-        <div className="mt-7 bg-[#1A1D21] w-8/12 rounded-lg border  border-gray-600">
+        <div className="mt-7 bg-[#1A1D21] sm:w-8/12 rounded-lg border  border-gray-600">
           <select
             className="py-3 px-2 w-full  bg-transparent outline-none"
             placeholder="Birth Certificate"
@@ -384,7 +384,7 @@ function RegistrationForm() {
           </select>
         </div>
 
-        <div className="mt-7 w-8/12">
+        <div className="mt-7 sm:w-8/12">
           <p className="mb-3 text-sm text-gray-300">ID Number</p>
           <div className="bg-[#1A1D21] rounded-lg border  border-gray-600">
             <input
@@ -395,8 +395,8 @@ function RegistrationForm() {
             />
           </div>
         </div>
-        <div>
-          <div>
+        <div className="sm:w-8/12 mt-7 py-2  bg-[#1A1D21] rounded-lg border  border-gray-600 ">
+          <div className="mx-auto cursor-pointer flex justify-center">
             <FileUploaderRegular
               pubkey="9b51718a8810981f5bc6"
               maxLocalFileSizeBytes={50000000}
@@ -433,7 +433,7 @@ function RegistrationForm() {
 
         <button
           onClick={handleClick}
-          className="mt-7 p-2 w-8/12 bg-[#24AE7C] text-white"
+          className="mt-7 p-2 sm:w-8/12 bg-[#24AE7C] text-white"
         >
           Submit and Continue
         </button>
