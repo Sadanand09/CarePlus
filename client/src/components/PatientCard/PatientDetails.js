@@ -242,7 +242,7 @@ function PatientDetails({
       {cancelModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-40">
           <div className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-            <div className="relative p-4 w-4/12">
+            <div className="relative p-4">
               <div className="relative bg-white pt-4 pb-4 rounded-lg shadow dark:bg-gray-800">
                 <div className="flex items-center justify-between p-4 md:p-5 b rounded-t ">
                   <div>
@@ -317,7 +317,7 @@ function PatientDetails({
       {scheduleModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-40">
           <div className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-            <div className="relative p-4 w-4/12">
+            <div className="relative p-4">
               <div className="relative bg-white pt-4 pb-4 rounded-lg shadow dark:bg-gray-800">
                 <div className="flex items-center justify-between p-4 md:p-5 b rounded-t ">
                   <div>

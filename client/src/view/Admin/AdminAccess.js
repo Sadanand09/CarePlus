@@ -78,7 +78,7 @@ function AdminAccess() {
           <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-40"></div>
           <div className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div
-              className={`relative p-4 w-3/12 bg-white rounded-lg shadow dark:bg-gray-800`}
+              className={`relative p-1 bg-white rounded-lg shadow dark:bg-gray-800`}
             >
               <div className="flex items-center justify-between p-4 md:p-5 rounded-t">
                 <div>
@@ -110,7 +110,7 @@ function AdminAccess() {
               <div className="p-4 md:p-5">
                 <form className="space-y-4" onSubmit={handleAdmin}>
                   <div className="flex justify-around text-[#24AE7C] caret-transparent text-7xl">
-                    <div className="h-16 w-16 me-4">
+                    <div className="h-12 w-12 ">
                       <input
                         type="password"
                         id="inputA"
@@ -120,14 +120,14 @@ function AdminAccess() {
                           handleInputChange(e, inputRefB);
                         }}
                         ref={inputRefA}
-                        className={`pb-6 text-center block h-full w-full p-2.5 outline-none rounded-lg bg-transparent border border-gray-600 
+                        className={`pb-6 text-center block h-full w-full p-2 outline-none rounded-lg bg-transparent border border-gray-600 
                         `}
                         required
                         maxLength={1}
                       />
                     </div>
 
-                    <div className="h-16 w-16 me-4">
+                    <div className="h-12 w-12">
                       <input
                         type="password"
                         id="inputB"
@@ -137,14 +137,14 @@ function AdminAccess() {
                           handleInputChange(e, inputRefC);
                         }}
                         ref={inputRefB}
-                        className={`pb-6 text-center block h-full w-full p-2.5 outline-none rounded-lg bg-transparent border border-gray-600 
+                        className={`pb-6 text-center block h-full w-full p-2 outline-none rounded-lg bg-transparent border border-gray-600 
                         `}
                         required
                         maxLength={1}
                       />
                     </div>
 
-                    <div className="h-16 w-16 me-4">
+                    <div className="h-12 w-12 ">
                       <input
                         type="password"
                         id="inputC"
@@ -154,21 +154,21 @@ function AdminAccess() {
                           handleInputChange(e, inputRefD);
                         }}
                         ref={inputRefC}
-                        className={`pb-6 text-center block h-full w-full p-2.5 outline-none rounded-lg bg-transparent border border-gray-600 
+                        className={`pb-6 text-center block h-full w-full p-2 outline-none rounded-lg bg-transparent border border-gray-600 
                         `}
                         maxLength={1}
                         required
                       />
                     </div>
 
-                    <div className="h-16 w-16 me-4">
+                    <div className="h-12 w-12 ">
                       <input
                         type="password"
                         id="inputD"
                         value={d}
                         onChange={(e) => setD(e.target.value)}
                         ref={inputRefD}
-                        className={`pb-6 text-center block h-full w-full p-2.5 outline-none rounded-lg bg-transparent border border-gray-600 `}
+                        className={`pb-6 text-center block h-full w-full p-2 outline-none rounded-lg bg-transparent border border-gray-600 `}
                         required
                         maxLength={1}
                       />
