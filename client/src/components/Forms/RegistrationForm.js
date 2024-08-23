@@ -431,12 +431,14 @@ function RegistrationForm() {
           </p>
         </div>
 
-        <button
-          onClick={handleClick}
-          className="mt-7 p-2 sm:w-8/12 bg-[#24AE7C] text-white"
-        >
-          Submit and Continue
-        </button>
+        <div className="sm:w-8/12">
+          <button
+            onClick={handleClick}
+            className="mt-7 p-2 w-full  bg-[#24AE7C] text-white"
+          >
+            Submit and Continue
+          </button>
+        </div>
       </div>
     </>
   );
