@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import emailjs from "@emailjs/browser";
 import axios from "axios";
 import toast from "react-hot-toast";
 
@@ -75,27 +74,27 @@ function PatientDetails({
     // Save the cancel status to the database
     await updateAppointmentStatus(_id, "cancelStatus", "Canceled");
   };
-  const form = useRef();
+  // const form = useRef();
 
-  const sendEmail = (e) => {
-    e.preventDefault();
+  // const sendEmail = (e) => {
+  //   e.preventDefault();
 
-    emailjs
-      .sendForm(
-        "service_hxrjp06", // Service ID
-        "template_7ua0j8n", // Template ID
-        form.current, // Form reference
-        "GxIORGD9KCYvN56M1" // Public Key
-      )
-      .then(
-        (result) => {
-          console.log("SUCCESS!", result.text);
-        },
-        (error) => {
-          console.log("FAILED...", error.text);
-        }
-      );
-  };
+  //   emailjs
+  //     .sendForm(
+  //       "service_hxrjp06", // Service ID
+  //       "template_7ua0j8n", // Template ID
+  //       form.current, // Form reference
+  //       "GxIORGD9KCYvN56M1" // Public Key
+  //     )
+  //     .then(
+  //       (result) => {
+  //         console.log("SUCCESS!", result.text);
+  //       },
+  //       (error) => {
+  //         console.log("FAILED...", error.text);
+  //       }
+  //     );
+  // };
 
   return (
     <>
@@ -374,7 +373,7 @@ function PatientDetails({
                     <button
                       type="submit"
                       className="w-full text-white bg-[#24AE7C] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                      onClick={sendEmail}
+                      onClick={handleScheduleAppointment}
                     >
                       Schedule appointment
                     </button>

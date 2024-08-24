@@ -33,28 +33,6 @@ function RegistrationForm() {
 
   const addPatient = async () => {
     try {
-      console.log({
-        name,
-        email,
-        mob_no,
-        dob,
-        gender,
-        address,
-        occupation,
-        emergencyname,
-        emergencynum,
-        physician,
-        ins_prov,
-        ins_num,
-        allergy,
-        current_med,
-        family_med_his,
-        past_med_his,
-        id_type,
-        id_num,
-        image,
-      });
-
       const response = await axios.post(
         `${process.env.REACT_APP_PORT}/careplus`,
         {
