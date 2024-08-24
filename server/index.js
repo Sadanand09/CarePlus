@@ -1,23 +1,17 @@
 import express from "express";
 import cors from "cors";
-import mongoose, { Schema, model } from "mongoose";
+import mongoose, { model } from "mongoose";
 import dotenv from "dotenv";
 
 dotenv.config();
 
 const app = express();
-app.use(
-  cors()
-);
+app.use(cors());
 app.use(express.json());
 
-// Connect to the database
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(process.env.MONGODB_URL);
     console.log("Database connected");
   } catch (error) {
     console.error("Database connection error:", error);
@@ -26,8 +20,7 @@ const connectDB = async () => {
 };
 connectDB();
 
-// Define the User model
-const userSchema = new Schema({
+const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
   mob_no: { type: Number, required: true },
@@ -54,8 +47,8 @@ const User = model("User", userSchema);
 const PORT = process.env.PORT || 5000;
 
 app.get("/", (req, res) => {
-  res.send("Working Clean")
-})
+  res.send("Working Clean");
+});
 
 app.get("/health", (req, res) => {
   res.json({
@@ -66,50 +59,13 @@ app.get("/health", (req, res) => {
 });
 
 app.post("/careplus", async (req, res) => {
-  const {
-    name,
-    email,
-    mob_no,
-    dob,
-    gender,
-    address,
-    occupation,
-    emergencyname,
-    emergencynum,
-    physician,
-    ins_prov,
-    ins_num,
-    allergy,
-    current_med,
-    family_med_his,
-    past_med_his,
-    id_type,
-    id_num,
-    image,
-  } = req.body;
+  const requiredFields = [
+    "name", "email", "mob_no", "dob", "gender", "address",
+    "occupation", "id_type", "id_num", "image"
+  ];
 
-  const requiredFields = {
-    name,
-    email,
-    mob_no,
-    dob,
-    gender,
-    address,
-    occupation,
-    emergencyname,
-    emergencynum,
-    physician,
-    ins_prov,
-    ins_num,
-    current_med,
-    past_med_his,
-    id_type,
-    id_num,
-    image,
-  };
-
-  for (const [field, value] of Object.entries(requiredFields)) {
-    if (!value) {
+  for (const field of requiredFields) {
+    if (!req.body[field]) {
       return res.status(400).json({
         success: false,
         message: `${field} is required`,
@@ -119,28 +75,7 @@ app.post("/careplus", async (req, res) => {
   }
 
   try {
-    const newUser = await User.create({
-      name,
-      email,
-      mob_no,
-      dob,
-      gender,
-      address,
-      occupation,
-      emergencyname,
-      emergencynum,
-      physician,
-      ins_prov,
-      ins_num,
-      allergy,
-      current_med,
-      family_med_his,
-      past_med_his,
-      id_type,
-      id_num,
-      image,
-    });
-
+    const newUser = await User.create(req.body);
     res.json({
       success: true,
       message: "User created successfully",
@@ -150,7 +85,7 @@ app.post("/careplus", async (req, res) => {
     console.error("Error creating user:", error);
     res.status(500).json({
       success: false,
-      message: "Error creating user",
+      message: `Error creating user: ${error.message}`,
       data: null,
     });
   }
@@ -168,7 +103,7 @@ app.get("/careplus", async (req, res) => {
     console.error("Error fetching users:", error);
     res.status(500).json({
       success: false,
-      message: "Error fetching users",
+      message: `Error fetching users: ${error.message}`,
       data: null,
     });
   }
@@ -177,7 +112,14 @@ app.get("/careplus", async (req, res) => {
 app.delete("/careplus/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    await User.findByIdAndDelete(id);
+    const deletedUser = await User.findByIdAndDelete(id);
+    if (!deletedUser) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+        data: null,
+      });
+    }
     res.json({
       success: true,
       message: "User deleted successfully",
@@ -187,7 +129,7 @@ app.delete("/careplus/:id", async (req, res) => {
     console.error("Error deleting user:", error);
     res.status(500).json({
       success: false,
-      message: "Error deleting user",
+      message: `Error deleting user: ${error.message}`,
       data: null,
     });
   }
