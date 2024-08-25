@@ -60,8 +60,16 @@ app.get("/health", (req, res) => {
 
 app.post("/careplus", async (req, res) => {
   const requiredFields = [
-    "name", "email", "mob_no", "dob", "gender", "address",
-    "occupation", "id_type", "id_num", "image"
+    "name",
+    "email",
+    "mob_no",
+    "dob",
+    "gender",
+    "address",
+    "occupation",
+    "id_type",
+    "id_num",
+    "image",
   ];
 
   for (const field of requiredFields) {
