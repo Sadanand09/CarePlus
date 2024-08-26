@@ -1,39 +1,18 @@
-import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import {connectDB} from "./db/index.js";
-import routes from './routes/index.js';
+import User from "../db/user.js";
 
-dotenv.config();
-
-const app = express();
-app.use(cors());
-app.use(express.json());
-
-
-const PORT = process.env.PORT || 5000;
-
-app.use('/api', routes)
-
-app.get("/", (req, res) => {
-    res.send("Working Clean");
-});
-
-app.get("/health", (req, res) => {
+function checkServerHealth(req, res) {
     res.json({
         success: true,
-        message: "Server is running",
+        message: "Server is healthy",
         data: null,
     });
-});
+}
 
-app.post("/careplus", async (req, res) => {
+async function registerPatient(req, res) {
     const requiredFields = [
         "name", "email", "mob_no", "dob", "gender", "address",
         "occupation", "id_type", "id_num", "image"
     ];
-
-    console.log("body", req.body);
 
     for (const field of requiredFields) {
         if (!req.body[field]) {
@@ -47,7 +26,7 @@ app.post("/careplus", async (req, res) => {
 
     try {
         const newUser = await User.create(req.body);
-        res.json({
+        res.status(201).json({
             success: true,
             message: "User created successfully",
             data: newUser,
@@ -60,12 +39,12 @@ app.post("/careplus", async (req, res) => {
             data: null,
         });
     }
-});
+}
 
-app.get("/careplus", async (req, res) => {
+async function getAllPatients(req, res) {
     try {
         const users = await User.find();
-        res.json({
+        res.status(200).json({
             success: true,
             message: "Users fetched successfully",
             data: users,
@@ -78,12 +57,58 @@ app.get("/careplus", async (req, res) => {
             data: null,
         });
     }
-});
+}
 
-app.delete("/careplus/:id", async (req, res) => {
-    const {id} = req.params;
+async function getPatientById(req, res) {
     try {
-        const deletedUser = await User.findByIdAndDelete(id);
+        const user = await User.findById(req.params.id);
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found",
+                data: null,
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "User fetched successfully",
+            data: user,
+        });
+    } catch (error) {
+        console.error("Error fetching user:", error);
+        res.status(500).json({
+            success: false,
+            message: `Error fetching user: ${error.message}`,
+            data: null,
+        });
+    }
+}
+
+async function updatePatient(req, res) {
+    try {
+        const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+        });
+        res.status(200).json({
+            success: true,
+            message: "User updated successfully",
+            data: updatedUser,
+        });
+    } catch (error) {
+        console.error("Error updating user:", error);
+        res.status(500).json({
+            success: false,
+            message: `Error updating user: ${error.message}`,
+            data: null,
+        });
+    }
+}
+
+async function deletePatient(req, res) {
+    try {
+        const deletedUser = await User.findByIdAndDelete(req.params.id);
         if (!deletedUser) {
             return res.status(404).json({
                 success: false,
@@ -91,7 +116,7 @@ app.delete("/careplus/:id", async (req, res) => {
                 data: null,
             });
         }
-        res.json({
+        res.status(200).json({
             success: true,
             message: "User deleted successfully",
             data: null,
@@ -104,9 +129,13 @@ app.delete("/careplus/:id", async (req, res) => {
             data: null,
         });
     }
-});
+}
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-    connectDB();
-});
+export {
+    checkServerHealth,
+    registerPatient,
+    getAllPatients,
+    getPatientById,
+    updatePatient,
+    deletePatient
+}

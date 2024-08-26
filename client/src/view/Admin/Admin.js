@@ -9,7 +9,7 @@ function Admin() {
     const patientDetails = async () => {
         try {
             const response = await axios.get(
-                `${process.env.REACT_APP_API_URL}/careplus`
+                `${process.env.REACT_APP_API_URL}/api/patients`
             );
             setPatients(response.data.data);
         } catch (error) {
