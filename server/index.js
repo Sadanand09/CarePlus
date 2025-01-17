@@ -104,6 +104,16 @@ app.delete("/careplus/:id", async (req, res) => {
     }
 });
 
+app.put('/careplus/updateStatus', (req, res) => {
+    const { patientId, status } = req.body;
+  
+    if (!patientId || !status) {
+      return res.status(400).send('Missing patientId or status');
+    }
+  
+    // Logic to update the patient's status in the database...
+    res.status(200).send('Status updated successfully');
+  });
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
     connectDB();
